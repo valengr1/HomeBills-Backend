@@ -2,6 +2,6 @@ import { Router } from "express";
 import { getMonths } from "../controllers/months.controller.js";
 const router = Router();
 
-router.get("/months", getMonths);
+router.get("/meses", getMonths);
 
 export default router;
