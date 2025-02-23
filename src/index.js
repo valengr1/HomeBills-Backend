@@ -1,5 +1,6 @@
 import express from "express";
 import monthRouter from "./routes/months.routes.js";
+import registrosRouter from "./routes/registros.routes.js";
 import cors from "cors";
 
 const app = express();
@@ -13,6 +14,7 @@ app.set("port", port);
 
 app.use(cors(corsOptions));
 app.use(monthRouter);
+app.use(registrosRouter);
 
 app.listen(app.get("port"), () => {
   console.log("app listening on port:", app.get("port"));

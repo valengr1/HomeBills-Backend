@@ -14,7 +14,7 @@ export const getMonths = async (req, res) => {
 
     // Obtener los meses existentes en la BD para el año 2025
     const [meses] = await pool.query(
-      `SELECT meses.idmes, meses.descripcion 
+      `SELECT año_mes.idaño_mes, meses.idmes, meses.descripcion 
        FROM año_mes 
        INNER JOIN meses ON año_mes.idmes = meses.idmes 
        WHERE numeroaño = 2025;`
