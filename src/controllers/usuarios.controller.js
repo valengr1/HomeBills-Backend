@@ -90,3 +90,14 @@ export const crearUsuario = async (req, res) => {
     res.status(500).json({ mensaje: "Error en la base de datos" });
   }
 };
+
+export const cerrarSesion = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error al cerrar la sesión:", err);
+      return res.status(500).json({ mensaje: "Error al cerrar sesión" });
+    }
+    console.log("Sesión cerrada");
+    res.status(200).json({ mensaje: "Sesión cerrada" });
+  });
+};
