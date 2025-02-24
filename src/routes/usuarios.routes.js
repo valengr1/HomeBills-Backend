@@ -6,7 +6,7 @@ import {
 
 //crear una instancia de Router
 const router = Router();
-//crear una ruta que reciba un body
+
 router.post("/usuarios/validar", validarUsuario);
 router.post("/usuarios/crear", crearUsuario);
 

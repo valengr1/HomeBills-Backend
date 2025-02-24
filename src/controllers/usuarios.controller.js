@@ -2,8 +2,6 @@ import { pool } from "./../db.js";
 import bcrypt from "bcryptjs";
 
 export const validarUsuario = async (req, res) => {
-  console.log("Body recibido:", req.body);
-
   if (!req.body) {
     return res
       .status(400)
@@ -43,7 +41,18 @@ export const validarUsuario = async (req, res) => {
         .json({ mensaje: "Usuario o contraseña incorrectos" });
     }
 
-    res.status(200).json({ mensaje: "Usuario autenticado" });
+    // ✅ Guardar sesión antes de enviar la respuesta
+    req.session.isLoggedIn = true;
+    req.session.username = usuario;
+
+    req.session.save((err) => {
+      if (err) {
+        console.error("Error al guardar la sesión:", err);
+        return res.status(500).json({ mensaje: "Error al iniciar sesión" });
+      }
+      console.log("Sesión iniciada:", req.session);
+      res.status(200).json({ mensaje: "Usuario autenticado" });
+    });
   } catch (error) {
     console.error("Error en la base de datos:", error);
     res.status(500).json({ mensaje: "Error en la base de datos" });
@@ -51,7 +60,7 @@ export const validarUsuario = async (req, res) => {
 };
 
 export const crearUsuario = async (req, res) => {
-  console.log("Body recibido:", req.body);
+  // console.log("Body recibido:", req.body);
 
   if (!req.body) {
     return res
